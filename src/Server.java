@@ -22,7 +22,7 @@ public class Server {
 
 	private ArrayList<User> info;
 	private HashMap<String, Socket> ID;
-
+	private int clientNum ;
 	public Server() {
 
 		try {
@@ -35,9 +35,10 @@ public class Server {
 			ID = new HashMap<String, Socket>();
 
 			while (true) {
-				System.out.println( ID.size() ) ;
-				if (ID.size() < 30) {
+				System.out.println( "injam  " + ID.size() ) ;
+				if (clientNum < 3) {
 					Socket client = ss.accept();
+					clientNum++ ;
 					// Runnable r = (Runnable) new Handler(client) ;
 					// System.out.println("client");
 					new Thread() {
@@ -157,6 +158,7 @@ public class Server {
 												myUserName = userName;
 												ID.put(userName, client);
 												System.out.println(userName);
+												System.out.println( ID.size() ) ;
 											} else {
 												pw.println("no");
 												pw.flush();
@@ -284,9 +286,10 @@ public class Server {
 								// pw.close();
 								// br.close();
 								// client.close();
-								System.out.println("injam") ;
-								ID.remove(client);
-
+								System.out.println( "ghabl az amal " + ID.size()) ;
+								ID.remove(myUserName);
+								clientNum-- ;
+								System.out.println("baad az amal" + ID.size()) ;
 								ObjectOutputStream oos = new ObjectOutputStream(
 										new FileOutputStream(
 												"C:\\Users\\mahdi\\workspace\\JChats(server)\\Users\\info.txt"));
