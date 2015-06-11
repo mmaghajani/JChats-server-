@@ -35,7 +35,7 @@ public class Server {
 			ID = new HashMap<String, Socket>();
 
 			while (true) {
-				System.out.println( "injam  " + ID.size() ) ;
+				System.out.println( "injam  " +clientNum ) ;
 				if (clientNum < 3) {
 					Socket client = ss.accept();
 					clientNum++ ;
